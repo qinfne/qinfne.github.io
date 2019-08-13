@@ -1,31 +1,100 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-<meta charset="UTF-8">
-<title>Three.js 粒子demo</title>
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>我的第一个网页-zqf</title>
+  <style>
+   *{margin:0;}
+   canvas{background:##ffffff;margin:100px auto;display:block;border-radius:10px;box-shadow:0px 0px 10px #000;}
+
+  </style>
+ </head>
+ <body>
+  <!--canvas 画布 画画的本子-->
+  <canvas width="450" height="450" id="canvas"></canvas>
+  <script>
+  //拿到画板
+  var chess = document.getElementById('canvas');
+  //获取权限
+  var context = chess.getContext('2d');
+  
+  //绘制线条的颜色
+  context.strokeStyle='#5b5b5b';
+
+  //绘制棋盘的方法
+  var drawChessboard=function(){
+	  //开始绘制
+	  for(var i=0;i<15;i++){
+		  //画竖线条
+		  context.moveTo(i*30+15,15);//起点
+		  context.lineTo(i*30+15,435);//终点
+		  context.stroke();//连接
+		  //画横线条
+		  context.moveTo(15,i*30+15);//起点
+		  context.lineTo(435,i*30+15);//终点
+		  context.stroke();//连接
+		  }
+	}
+	drawChessboard();
+
+	//绘制棋子的方法   圆形 圆心 半径
+	var onStep =function(i,j,me){
+		//context.arc(圆心x坐标，圆心y坐标，半径，起始位置，终点位置Π)
+		
+		context.beginPath();//开始路径
+		context.arc(i*30+15,j*30+15,13,0,Math.PI*2);
+		context.closePath();//结束路径
+		
+		//判断棋子的颜色
+		//设置渐变色 径向渐变
+		
+		var gradient = context.createRadialGradient(i*30+15+2,j*30+15-2,13,i*30+15+2,j*30+15-2,0);
+
+		if(me){
+			gradient.addColorStop(0,'#0a0a0a');
+			gradient.addColorStop(1,'#636767');//设置填充颜色
+		}else{
+			gradient.addColorStop(0,'#d1d1d1');
+			gradient.addColorStop(1,'#f9f9f9');//设置填充颜色
+		}
+		context.fillStyle=gradient;//填充
+		context.fill();
+		
+	}
+
+	var me = true;
+	//定义一个数组
+
+
+	//下棋的方法
+	chess.onclick = function(e){
+		
+		//获取鼠标的坐标
+		var x = e.offsetX;
+		var y = e.offsetY;
+		
+		var i =Math.floor(x/30);
+		var j =Math.floor(y/30);
+		onStep(i,j,me);
+		me = !me;
+		
+
+	}
+
+
+	
 
 
 
-<link rel="stylesheet" href="css/style.css">
 
 
-</head>
+  
+  
+  </script>
 
-<body>
-
-<script type="text/javascript" src="js/three.min.js"></script> 
-
-<script type="text/javascript" src="js/dat.gui.min.js"></script>
-
-<script type="text/javascript" src="js/Stats.min.js"></script>
-
-<div id="Stats-output"></div>
-
-<div id="WebGL-output"></div>
-
-<script src='js/jquery.min.js'></script>
-
-<script src="js/index.js"></script>
-
-</body>
+ </body>
 </html>
