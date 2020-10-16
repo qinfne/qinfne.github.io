@@ -38,6 +38,83 @@
 		
 	</head>
 	<body>
+		<p>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace T01
+{
+    class Program //计算机长方形周长面积
+    {
+        public static void Main(string[] args)
+        {
+            Rectangle cc=new Rectangle();
+            cc.Length =Convert.ToDouble(Console.ReadLine());
+            cc.Width = Convert.ToDouble(Console.ReadLine()); ;
+            cc.display();
+            Console.ReadLine();
+            
+        }
+    }
+
+    class Rectangle
+    {
+        public double width;
+        public double length;
+        public double Width
+        {
+            get
+            { return width; }
+            set
+            {
+                width = value;
+            }
+        }
+        public double Length
+        {
+            get
+            { return length ; }
+            set
+            {
+                length  = value;
+            }
+        }
+
+        Rectangle() { }
+
+        public Rectangle(double width=0, double l=0)
+        {
+            this.width = width;
+            length = l;
+        }
+
+        public double GetArea(double width, double length)
+        {
+            return length * width;
+        }
+        public double GetPerimeter(double width, double length)
+        {
+            return (length + width) * 2;
+        }
+        public void display()
+        {
+            Console.Write("长：");
+            Console.WriteLine(this.Length);
+            Console.Write("宽：", this.Width);
+            Console.WriteLine( this.Width);
+            Console.Write("周长：");
+            Console.WriteLine(GetPerimeter(this.length, this.width));
+            Console.WriteLine("面积：" +GetArea(this.length, this.width));
+        }
+
+    }
+
+
+    
+}
+</p>
 		<h3 id="result-wrap">--益智五子棋--</h3>
 		<canvas id="chess" width="450px" height="450px"></canvas>
 		<div id="btn-wrap">
